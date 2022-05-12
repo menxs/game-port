@@ -10,15 +10,8 @@ import Config
 # which you should run after static files are built and
 # before starting your production server.
 config :game, GameWeb.Endpoint,
-  cache_static_manifest: "priv/static/cache_manifest.json",
-  url: [host: "insider.gigalixirapp.com", port: 443],
-  force_ssl: [hsts: true],
-  https: [
-    port: 443,
-    cipher_suite: :strong,
-    keyfile: System.get_env("SOME_APP_SSL_KEY_PATH"),
-    certfile: System.get_env("SOME_APP_SSL_CERT_PATH")
-  ]
+url: [host: "${APP_NAME}.gigalixirapp.com", port: 443],
+cache_static_manifest: "priv/static/cache_manifest.json"
 
 # Do not print debug messages in production
 config :logger, level: :info
