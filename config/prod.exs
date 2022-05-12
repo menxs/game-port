@@ -11,6 +11,7 @@ import Config
 # before starting your production server.
 config :game, GameWeb.Endpoint,
 url: [host: "${APP_NAME}.gigalixirapp.com", port: 443],
+check_origin: ["//insider.gigalixirapp.com"],
 cache_static_manifest: "priv/static/cache_manifest.json"
 
 # Do not print debug messages in production
