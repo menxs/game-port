@@ -207,6 +207,8 @@ div.votes-bar {
     height: auto;
   }
   to {
+    width: 0;
+    height: 0;
     visibility: hidden;
     opacity: 0;
   }
@@ -216,11 +218,10 @@ div.votes-bar {
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 
 div.disappear{
-  width: 0;
-  height: 0;
   visibility: hidden;
   animation-name: disappear;
-  animation-duration: 2s
+  animation-duration: 2s;
+  animation-fill-mode: forwards;
 }
 
 /* Animation clases

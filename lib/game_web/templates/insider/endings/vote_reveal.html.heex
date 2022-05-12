@@ -1,7 +1,8 @@
 <div class="section">
-  <h6>Is <strong><%= @insider.player_foundit%></strong> the insider?</h6>
 
   <div class="reveal">
+    <h6>Is <strong><%= @insider.player_foundit%></strong> the insider?</h6>
+    
     <div class="row">
       <div class="row votes">
         <div class="votes-bar" style={"max-width: #{(80/@insider.votes.total) * @insider.votes.count}%;"}></div>
