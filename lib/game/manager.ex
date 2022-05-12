@@ -78,7 +78,7 @@ defmodule Game.Manager do
       phase: :setup,
       seq: seq,
       players: players,
-      timer: 15,
+      timer: 3 * 60,
       timeout_date: nil,
       word: Enum.random(Game.Words.list()),
       player_foundit: :tbd,
