@@ -1,0 +1,68 @@
+<div class="reveal">
+
+  <div class="section" id="timer-disc" phx-hook="Timer" timeout-date={DateTime.to_iso8601(@insider.timeout_date)}>
+  </div>
+
+  <h6 class="section">
+    <strong><%= @insider.player_foundit %></strong>
+    guessed
+    <strong><%=@insider.word%></strong>
+  </h6>
+
+  <%= if @insider.player_foundit != @me do %>
+    <div id="discussion-vote" class="section">
+
+      <h6> Are they the insider?</h6>
+
+      <div class="row">
+        <div class="one-half column">
+          <button id="vote-yay" phx-click="judge" phx-value-vote="yay" class={"u-full-width #{if @insider_vote do "selected" else "" end}"}>
+            Yes
+          </button>
+        </div>
+        <div class="one-half column">
+
+          <button id="vote-nay" phx-click="judge" phx-value-vote="nay" class={"u-full-width #{if @insider_vote do "" else "selected" end}"}>
+            No
+          </button>
+        </div>
+      </div>
+
+    </div>
+  <% end %>
+
+  <div id="discussion-accuse" class="section">
+
+    <%= if @insider.player_foundit == @me do %>
+      <h6>Who is the insider?</h6>
+    <% else %>
+      <h6>What is your other guess?</h6>
+    <% end %>
+
+    <form phx-submit="accuse">
+      <select name="accused" class="u-full-width">
+          <%= for {name, info} <- @insider.players do%>
+            <%= if (@insider.player_foundit != name)
+            and (info.role != :master)
+            and (@me != name) do %>
+              <option value={name}><%=name%></option>
+            <% end %>
+          <%end%>
+      </select>
+      <input type="submit" class="u-full-width" value="Accuse player">
+    </form>
+
+  </div>
+
+  <%= if @ready.players[@me] do %>
+    <button phx-click="not_ready" class="u-full-width selected">
+      <%=Enum.count(@ready.players, fn {_, ready} -> ready end)%>/<%=max(length(Map.keys(@ready.players)), @ready.min)%> Done
+    </button>
+  <% else %>
+    <button phx-click="ready" class="u-full-width">
+      <%=Enum.count(@ready.players, fn {_, ready} -> ready end)%>/<%=max(length(Map.keys(@ready.players)), @ready.min)%> Done
+    </button>
+  <% end %>
+
+
+</div>

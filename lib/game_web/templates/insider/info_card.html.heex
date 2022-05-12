@@ -1,0 +1,26 @@
+<div id="info-card" class="role-card pattern-background" phx-hook="InfoCard">
+  <div class="player-name">
+    <%=@me%>
+  </div>
+  <div id="info-role" role={Atom.to_string(@insider_info.role)}>
+    <div class="role-icon">
+      <%= case @insider_info.role do %>
+        <% :insider ->%>
+          <%= render "logos/logo_insider.html", assigns %>
+        <% :master ->%>
+          <%= render "logos/logo_master.html", assigns %>
+        <% :commons ->%>
+          <%= render "logos/logo_commons.html", assigns %>
+      <% end %>
+    </div>
+    <div class="role-text">
+      <%=Atom.to_string(@insider_info.role)%>
+    </div>
+  </div>
+  <div id="target-word">
+    <%= if assigns[:insider_info][:word] do %>
+      Word: <strong><%=@insider_info.word%></strong>
+    <% end %>
+  </div>
+  <button>Hold to reveal</button>
+</div>

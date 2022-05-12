@@ -1,0 +1,55 @@
+<div class="row" style="text-align: center;">
+  <div class="one-half center column">
+
+    <div class="banner section pattern-background">
+      <div class="banner-text">
+      Lobby <strong><%=@lobby.id%></strong>
+      </div>
+    </div>
+
+  <%= if assigns[:me] == nil do %>
+
+    <form phx-submit="set_name">
+      <input type="text" class="u-full-width" name="name" placeholder="Choose name" maxlength="16" required>
+      <input type="submit" class="u-full-width" value="ok">
+    </form>
+
+  <% else %>
+
+    <%= if assigns[:ready] != nil do %>
+      <%= if @ready.players[@me] do %>
+        <button phx-click="lobby_not_ready" class="u-full-width selected">
+          <%=Enum.count(@ready.players, fn {_, ready} -> ready end)%>/<%=max(length(Map.keys(@ready.players)), @ready.min)%> Ready
+        </button>
+      <% else %>
+        <button phx-click="lobby_ready" class="u-full-width">
+          <%=Enum.count(@ready.players, fn {_, ready} -> ready end)%>/<%=max(length(Map.keys(@ready.players)), @ready.min)%> Ready
+        </button>
+      <% end %>
+
+      <%= if assigns[:lobby][:players] != nil do %>
+        <table class="u-full-width">
+          <thead>
+            <tr>
+              <th>Players</th>
+            </tr>
+          </thead>
+          <tbody>
+            <%= for name <- @lobby.players do %>
+              <tr>
+                <td>
+                  <%=name%>
+                  <%= if @ready.players[name] do %>
+                  ✅
+                  <% end %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      <% end %>
+    <% end %>
+
+  <% end %>
+  </div>
+</div>

@@ -1,0 +1,253 @@
+/* Spacing
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+button,
+.button, h6 {
+  margin-bottom: 1.5rem; }
+.section {
+  margin-bottom: 2.5rem; }
+form {
+  margin-bottom: 0; }
+
+/* Colors
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+/* Dark Theme */
+
+[data-theme="dark"] {
+  --card-color                  : #111;
+  --card-color-2                : #222;
+  --card-color-3                : #22222255;
+}
+
+/*
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+#theme-switch {
+  position: fixed;
+  top: 2rem;
+  right: 2rem;
+  font-size: 1.5em;
+  cursor: pointer;
+  opacity: .3;
+  transition: opacity 0.4s;
+  width: 2.5rem;
+  height: 2.5rem;
+}
+
+#theme-switch:hover {
+  opacity: 1;
+}
+
+path {
+  fill: var(--font-color);
+}
+.container {
+  margin-top: 10vh;
+  margin-bottom: 10vh;
+}
+.column.center {
+  float: none;
+  margin: auto;
+}
+/*
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+input#lobby-id-input {
+  text-align: center; }
+
+button.selected {
+  color: var(--bg-color);
+  background-color: var(--font-color);
+}
+.pattern-background{
+  background-color: var(--card-color);
+  opacity: 0.8;
+  background: linear-gradient(135deg, var(--card-color-3) 25%, transparent 25%) -10px 0/ 20px 20px, linear-gradient(225deg, var(--card-color-2) 25%, transparent 25%) -10px 0/ 20px 20px, linear-gradient(315deg, var(--card-color-3) 25%, transparent 25%) 0px 0/ 20px 20px, linear-gradient(45deg, var(--card-color-2) 25%, var(--card-color) 25%) 0px 0/ 20px 20px;
+  border-radius: 4px;
+  border: 1px solid var(--button-border);
+}
+
+/*
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+div#info-role {
+  opacity: 0;
+  transition: opacity .8s;
+}
+
+div#info-role[role=master] {
+  transition-property: none;
+  animation-name: reveal;
+  animation-duration: 1.6s;
+  animation-fill-mode: forwards;
+}
+
+div#target-word {
+  opacity: 0;
+  transition: opacity .8s;
+  width: 100%;
+  height: 2em;
+  margin-bottom: 25%;
+  user-select: none;
+}
+
+
+/*
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+div#controls {
+  padding: 20px;
+  max-width: 250px;
+  margin: auto;
+}
+/* Role card
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+div.role-card {
+  text-align: center;
+  max-width: 250px;
+  padding: 20px;
+  margin: auto;
+}
+
+div.player-name {
+  font-size: 1.5em;
+  font-weight: bold;
+  user-select: none;
+}
+
+div.role-icon {
+  margin: 0 25%;
+  margin-top: 10%;
+  margin-bottom: 0;
+}
+
+div.role-text {
+  font-weight: bolder;
+  text-transform: uppercase;
+  font-size: 2em;
+  user-select: none;
+}
+
+/* Small role card
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+div.role-card.small {
+  width: 80%; }
+
+div.player-name.small {
+  font-size: 1.5em; }
+
+div.role-icon.small {
+  margin: 0 25%; }
+
+div.role-text.small {
+  font-size: 1.5em; }
+
+  div.role-card.large {
+    padding-top: 10%;
+    padding-bottom: 30%;
+  }
+
+/* Banner
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+div.banner {
+  padding: 10px;
+}
+div.banner-text {
+  font-size: 1.5em;
+}
+/*Voting Bars
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+div.votes {
+  font-size: 1.5rem;
+  position: relative;
+  height: 2rem;
+  margin-bottom: 1.5em;
+}
+
+div.votes-label {
+  padding-left: 1rem;
+  position: absolute;
+  height: 100%;
+}
+div.votes-count {
+  padding-left: 1rem;
+  color: var(--bg-color);
+  position: absolute;
+  left: 20%;
+}
+
+div.votes-bar {
+  position: absolute;
+  left: 20%;
+  top: 0;
+  min-width: 3rem;
+  width: 100%;
+  max-width: 80%;
+  height: 100%;
+  background: var(--font-color);
+  border-radius: 4px;
+  animation-name: grow;
+  animation-duration: 2s;
+}
+
+
+/*Animations
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+@keyframes grow {
+  from {width: 0%;}
+  to {width: 100%;}
+}
+
+
+
+@keyframes disappear {
+  from {
+    width: auto;
+    height: auto;
+    visibility: visible;
+    opacity: 1;
+  }
+  99.99% {
+    width: auto;
+    height: auto;
+  }
+  to {
+    visibility: hidden;
+    opacity: 0;
+  }
+}
+
+/*Disappear sections
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+
+div.disappear{
+  width: 0;
+  height: 0;
+  visibility: hidden;
+  animation-name: disappear;
+  animation-duration: 2s
+}
+
+/* Animation clases
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+@keyframes reveal {
+  from {opacity: 0;}
+  to {
+     opacity: 1;
+     visibility: visible;
+  }
+}
+.reveal {
+  opacity: 0;
+  visibility: hidden;
+  animation-name: reveal;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+}
+
+/* Animation Delays
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+.wait-1 {animation-delay: 2s;}
+.wait-2 {animation-delay: 4s;}
+.wait-3 {animation-delay: 6s;}
+.wait-4 {animation-delay: 8s;}
+.wait-5 {animation-delay: 10s;}
+.wait-6 {animation-delay: 12s;}
+.wait-7 {animation-delay: 14s;}
+.wait-8 {animation-delay: 16s;}
+.wait-9 {animation-delay: 18s;}

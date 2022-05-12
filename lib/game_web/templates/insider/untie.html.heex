@@ -1,0 +1,27 @@
+
+<%= render "endings/vote_reveal.html", assigns %>
+
+<div class="wait-3 reveal">
+  <h6>
+    The accusations are tied between
+    <strong>
+      <%=Enum.join(List.delete_at(@insider.accusations, -1), ", ")%>
+    </strong>
+    and
+    <strong>
+      <%= List.last(@insider.accusations)%>
+    </strong>
+    the master will decide
+  </h6>
+
+  <%= if @insider_info.role == :master do %>
+    <form phx-submit="untie">
+      <select name="player" class="u-full-width">
+          <%= for name <- @insider.accusations do%>
+            <option value={name}><%=name%></option>
+          <%end%>
+      </select>
+        <input type="submit" class="u-full-width" value="Untie">
+    </form>
+  <% end %>
+</div>

@@ -1,0 +1,58 @@
+
+<div class="row" style="text-align: center;">
+
+  <div class="one-half column">
+    <%= render "info_card.html", assigns %>
+  </div>
+
+  <div class="one-half column">
+    <div id="controls">
+      <%= case @insider.phase do %>
+
+        <% :setup -> %>
+          <%= if @insider_info.role == :master do %>
+            <button phx-click="start_guessing" class="u-full-width">Start</button>
+          <% end %>
+
+        <% :guessing -> %>
+
+          <div class="section" id="timer-guess" phx-hook="Timer" timeout-date={DateTime.to_iso8601(@insider.timeout_date)}>
+          </div>
+
+          <%= if @insider_info.role == :master do %>
+            <h6>Select the player that guessed the word</h6>
+            <form phx-submit="word_found">
+              <select name="player" class="u-full-width">
+                  <%= for {name, info} <- @insider.players do%>
+                    <%= if info.role != :master do %>
+                      <option value={name}><%=name%></option>
+                    <% end %>
+                  <%end%>
+              </select>
+                <input type="submit" class="u-full-width" value="Word guessed!">
+            </form>
+            <button phx-click="word_not_found" class="u-full-width">Give up</button>
+          <% end %>
+
+        <% :discussion -> %>
+          <%= render "discussion.html", assigns %>
+
+        <% :untie -> %>
+          <%= render "untie.html", assigns %>
+
+        <% {:end, reason} -> %>
+          <%= case reason do
+            :timeout ->
+              render("endings/end_timeout.html", assigns)
+            :vote ->
+              render("endings/end_vote.html", assigns)
+            :acc ->
+              render("endings/end_accusations.html", assigns)
+            :untie ->
+              render("endings/end_untie.html", assigns)
+          end%>
+      <% end %>
+    </div>
+  </div>
+
+</div>

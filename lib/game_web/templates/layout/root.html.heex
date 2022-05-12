@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="csrf-token" content={csrf_token_value()}>
+    <%= live_title_tag assigns[:page_title] || "Game", suffix: " · Phoenix Framework" %>
+    <script defer phx-track-static type="text/javascript" src={Routes.static_path(@conn, "/assets/app.js")}></script>
+    <link phx-track-static rel="stylesheet" href={Routes.static_path(@conn, "/assets/app.css")}/>
+  </head>
+  <body>
+    <header>
+      <i id="theme-switch" aria-hidden="true">
+        <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+        	 viewBox="0 0 222.99 222.99" style="enable-background:new 0 0 222.99 222.99;" xml:space="preserve">
+        <path d="M111.495,0C50.016,0,0,50.017,0,111.495S50.016,222.99,111.495,222.99S222.99,172.974,222.99,111.495S172.973,0,111.495,0z
+        	 M110.971,192.99c-0.096,0,0.191-0.007-0.809-0.007V30.007c1,0,0.624-0.007,0.72-0.007c44.937,0,81.763,36.559,81.763,81.495
+        	S155.907,192.99,110.971,192.99z"/>
+        </svg>
+      </i>
+    </header>
+    <div class="container">
+      <%= @inner_content %>
+    </div>
+  </body>
+</html>

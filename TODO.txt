@@ -1,0 +1,40 @@
+
+
+[x] time guessing
+[x] see timers
+[x] time discussion
+[x] put the word if everyone loses
+[x] rematch
+[x] not blank name not long name
+[x] si el host se va la partida se cae
+[x] cierro tab en lobby
+rule checks??
+
+[ ] simple testing and hosting
+
+[ ] optional timers
+[ ] customizable timer
+
+
+rules in 2nd column before disscusion
+
+[x] trim strings
+player_ids
+copy Code
+code qr
+[ ] cierro tab en game
+[ ] players left-sequencer
+timeout lobby
+done resetea  el input select
+
+New game
+------------------------------
+separar lobby e insider controlers e templates redirect link
+Host de la party
+----------------
+
+Ayudas de juego
+
+Manual de juego
+
+Footer con contacto
