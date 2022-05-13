@@ -91,7 +91,6 @@ div#target-word {
 /*
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 div#controls {
-  padding: 20px;
   max-width: 250px;
   margin: auto;
 }
@@ -101,7 +100,8 @@ div.role-card {
   text-align: center;
   max-width: 250px;
   padding: 20px;
-  margin: auto;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 div.player-name {
