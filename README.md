@@ -1,5 +1,7 @@
 # Game
 
+This repo is deployed with gigalixir [here](https://insider.gigalixirapp.com/)
+
 To start your Phoenix server:
 
   * Install dependencies with `mix deps.get`
