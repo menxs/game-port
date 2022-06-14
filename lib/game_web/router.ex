@@ -21,7 +21,8 @@ defmodule GameWeb.Router do
     get "/new",        HomeController, :create
     get "/join",       HomeController, :join
     live "/lobby/:id", LobbyLive
-    live "/insider",   InsiderLive
+    # Deprecated
+    get "/insider",   HomeController, :index
   end
 
   # Other scopes may use custom stacks.

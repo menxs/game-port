@@ -20,6 +20,7 @@ defmodule GameWeb.InsiderLive do
         |> assign(me: me)
         |> assign(pub_state: pub_state)
         |> assign(priv_state: priv_state)
+        |> assign(insider_vote: false)
       {:ok, socket}
     else
       {:ok, socket}

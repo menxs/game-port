@@ -11,7 +11,7 @@
   <div class="one-half center column">
     <%= if @endscreen do %>
       <%= if assigns[:ready] do %>
-      <div id="rematch" class="wait-7 reveal">
+      <div id="rematch" class="reveal">
         <%= if @ready.players[@me] do %>
           <button phx-click="not_ready" class="u-full-width selected">
             <%=Enum.count(@ready.players, fn {_, ready} -> ready end)%>/<%=max(length(Map.keys(@ready.players)), @ready.min)%> Rematch
