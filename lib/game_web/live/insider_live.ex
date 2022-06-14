@@ -91,8 +91,4 @@ defmodule GameWeb.InsiderLive do
     :ok
   end
 
-  defp lobby(socket), do: lobby_name(socket.assigns.lobby_id)
-  defp lobby_name(id), do: {:via, Registry, {Game.Bottleneck, id}}
-
-
 end
