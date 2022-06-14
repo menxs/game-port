@@ -5,19 +5,19 @@
   <h6>
     The accusations are tied between
     <strong>
-      <%=Enum.join(List.delete_at(@insider.accusations, -1), ", ")%>
+      <%=Enum.join(List.delete_at(@pub_state.accusations, -1), ", ")%>
     </strong>
     and
     <strong>
-      <%= List.last(@insider.accusations)%>
+      <%= List.last(@pub_state.accusations)%>
     </strong>
     the master will decide
   </h6>
 
-  <%= if @insider_info.role == :master do %>
+  <%= if @priv_state.role == :master do %>
     <form phx-submit="untie">
       <select name="player" class="u-full-width">
-          <%= for name <- @insider.accusations do%>
+          <%= for name <- @pub_state.accusations do%>
             <option value={name}><%=name%></option>
           <%end%>
       </select>

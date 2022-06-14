@@ -6,15 +6,6 @@
 
 <div class="wait-7 reveal section">
 
-  <div class="section"><%=winner_phrase(@insider) %></div>
+  <div class="section"><%=winner_phrase(@pub_state) %></div>
 
-  <%= if @ready.players[@me] do %>
-    <button class="u-full-width selected">
-      <%=Enum.count(@ready.players, fn {_, ready} -> ready end)%>/<%=max(length(Map.keys(@ready.players)), @ready.min)%> Rematch
-    </button>
-  <% else %>
-    <button phx-click="lobby_ready" class="u-full-width">
-      <%=Enum.count(@ready.players, fn {_, ready} -> ready end)%>/<%=max(length(Map.keys(@ready.players)), @ready.min)%> Rematch
-    </button>
-  <% end %>
 </div>

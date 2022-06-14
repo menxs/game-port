@@ -7,23 +7,23 @@
 
   <div class="one-half column">
     <div id="controls">
-      <%= case @insider.phase do %>
+      <%= case @pub_state.phase do %>
 
         <% :setup -> %>
-          <%= if @insider_info.role == :master do %>
+          <%= if @priv_state.role == :master do %>
             <button phx-click="start_guessing" class="u-full-width">Start</button>
           <% end %>
 
         <% :guessing -> %>
 
-          <div class="section" id="timer-guess" phx-hook="Timer" timeout-date={DateTime.to_iso8601(@insider.timeout_date)}>
+          <div class="section" id="timer-guess" phx-hook="Timer" timeout-date={DateTime.to_iso8601(@pub_state.timeout_date)}>
           </div>
 
-          <%= if @insider_info.role == :master do %>
+          <%= if @priv_state.role == :master do %>
             <h6>Select the player that guessed the word</h6>
             <form phx-submit="word_found">
               <select name="player" class="u-full-width">
-                  <%= for {name, info} <- @insider.players do%>
+                  <%= for {name, info} <- @pub_state.players do%>
                     <%= if info.role != :master do %>
                       <option value={name}><%=name%></option>
                     <% end %>

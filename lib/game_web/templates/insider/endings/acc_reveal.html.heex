@@ -1,17 +1,17 @@
 <div class="section">
   <h6 class="wait-4 reveal">
-    <strong><%=@insider.accusations.accused%></strong> was the most accused player
+    <strong><%=@pub_state.accusations.accused%></strong> was the most accused player
   </h6>
 
   <div class="role-card small pattern-background wait-5 reveal">
 
     <div class="player-name small">
-      <strong><%=@insider.accusations.accused%></strong>
+      <strong><%=@pub_state.accusations.accused%></strong>
     </div>
 
     <div class="wait-6 reveal">
       <div class="role-icon small">
-        <%= case @insider.accusations.role do %>
+        <%= case @pub_state.accusations.role do %>
           <% :insider ->%>
             <%= render "logos/logo_insider.html", assigns %>
           <% :master ->%>
@@ -21,7 +21,7 @@
         <% end %>
       </div>
       <div class="role-text small">
-        <%=@insider.accusations.role%>
+        <%=@pub_state.accusations.role%>
       </div>
     </div>
 

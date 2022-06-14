@@ -9,12 +9,12 @@ defmodule Game.Manager do
     GenServer.start_link(__MODULE__, init_args, opts)
   end
 
-  def get_state(manager) do
-    GenServer.call(manager, :get_state)
+  def get_pub_state(manager) do
+    GenServer.call(manager, :get_pub_state)
   end
 
-  def get_info(manager, player) do
-    GenServer.call(manager, {:get_info, player})
+  def get_priv_state(manager, player) do
+    GenServer.call(manager, {:get_priv_state, player})
   end
 
   def start_guessing(manager) do
@@ -91,13 +91,13 @@ defmodule Game.Manager do
   end
 
   @impl true
-  def handle_call(:get_state, _from, state) do
-    {:reply, {:ok, client_state(state)}, state}
+  def handle_call(:get_pub_state, _from, state) do
+    {:reply, {:ok, pub_state(state)}, state}
   end
 
   @impl true
-  def handle_call({:get_info, player}, _from, state) do
-    info =
+  def handle_call({:get_priv_state, player}, _from, state) do
+    priv_state =
       case state.players[player].role do
         :master ->
           %{role: :master, word: state.word}
@@ -106,7 +106,7 @@ defmodule Game.Manager do
         :commons ->
           %{role: :commons}
       end
-    {:reply, {:ok, info}, state}
+    {:reply, {:ok, priv_state}, state}
   end
 
   @impl true
@@ -116,7 +116,7 @@ defmodule Game.Manager do
       timeout_date: DateTime.utc_now |> DateTime.add(state.timer)
     }
     :ok = Game.Sequencer.apply_on_timer(state.seq, &word_not_found/1, [self()], state.timer * 1000)
-    broadcast(state, {:update, :insider, client_state(state)})
+    broadcast(state, {:update, :pub_state, pub_state(state)})
     {:reply, :ok, state}
   end
 
@@ -124,8 +124,8 @@ defmodule Game.Manager do
   def handle_call(:word_not_found, _from, %{phase: :guessing} = state) do
     :ok = Game.Sequencer.cancel(state.seq)
     state = %{state | phase: {:end, :timeout}, winner: :none}
-    broadcast(state, {:update, :insider, state})
-    {:reply, :ok, state}
+    broadcast(state, {:update, :pub_state, state})
+    {:stop, :normal, :ok, state}
   end
 
   @impl true
@@ -141,7 +141,7 @@ defmodule Game.Manager do
 
     :ok = Game.Sequencer.apply_on_both(state.seq, &resolve_game/1, [self()], state.timer * 1000)
 
-    broadcast(state, {:update, :insider, client_state(state)})
+    broadcast(state, {:update, :pub_state, pub_state(state)})
     {:reply, :ok, state}
   end
 
@@ -209,7 +209,7 @@ defmodule Game.Manager do
       accusations: accusations,
       winner: winner
     }
-    broadcast(state, {:update, :insider, state})
+    broadcast(state, {:update, :pub_state, state})
     if state.phase == :untie do
       {:reply, :ok, state}
     else
@@ -226,11 +226,16 @@ defmodule Game.Manager do
         accusations: accusations,
         winner: winner
       }
-      broadcast(state, {:update, :insider, state})
+      broadcast(state, {:update, :pub_state, state})
       {:stop, :normal, :ok, state}
     else
       {:reply, :error, state}
     end
+  end
+
+  @impl true
+  def terminate(_reason, state) do
+    PubSub.broadcast(Game.PubSub, "lobby:"<>state.id, :endscreen)
   end
 
   defp resolve_game(state, votes, accusations) do
@@ -279,7 +284,7 @@ defmodule Game.Manager do
     PubSub.broadcast(Game.PubSub, "insider:"<>state.id, msg)
   end
 
-  defp client_state(state) do
+  defp pub_state(state) do
     state =
       Map.update!(state, :players,&Map.new(Enum.map(&1,
         fn

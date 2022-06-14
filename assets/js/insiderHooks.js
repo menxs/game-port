@@ -20,6 +20,9 @@ InsiderHooks.InfoCard = {
     infoCard.addEventListener("mousedown", show);
     infoCard.addEventListener("mouseup", hide);
     infoCard.addEventListener("mouseleave", hide);
+    infoCard.addEventListener("touchstart", show);
+    infoCard.addEventListener("touchend", hide);
+    infoCard.addEventListener("touchcancel", hide);
   }
 }
 

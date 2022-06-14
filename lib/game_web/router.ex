@@ -17,8 +17,11 @@ defmodule GameWeb.Router do
   scope "/", GameWeb do
     pipe_through :browser
 
-    get "/", PageController, :index
-    live "/insider", InsiderLive
+    get "/",           HomeController, :index
+    get "/new",        HomeController, :create
+    get "/join",       HomeController, :join
+    live "/lobby/:id", LobbyLive
+    live "/insider",   InsiderLive
   end
 
   # Other scopes may use custom stacks.

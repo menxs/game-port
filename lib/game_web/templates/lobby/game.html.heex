@@ -1,0 +1,28 @@
+
+    <%= live_render(
+          @socket,
+          GameWeb.InsiderLive,
+          session: %{"id" => @lobby_id, "game_ref" => @game_ref, "me" => @me},
+          id: "insider_liveview_"<>to_string(:erlang.pid_to_list(@game_ref))
+        )
+    %>
+
+<div class="row">
+  <div class="one-half center column">
+    <%= if @endscreen do %>
+      <%= if assigns[:ready] do %>
+      <div id="rematch" class="wait-7 reveal">
+        <%= if @ready.players[@me] do %>
+          <button phx-click="not_ready" class="u-full-width selected">
+            <%=Enum.count(@ready.players, fn {_, ready} -> ready end)%>/<%=max(length(Map.keys(@ready.players)), @ready.min)%> Rematch
+          </button>
+        <% else %>
+          <button phx-click="ready" class="u-full-width">
+            <%=Enum.count(@ready.players, fn {_, ready} -> ready end)%>/<%=max(length(Map.keys(@ready.players)), @ready.min)%> Rematch
+          </button>
+        <% end %>
+      </div>
+      <% end %>
+    <% end %>
+  </div>
+</div>

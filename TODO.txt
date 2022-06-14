@@ -1,9 +1,11 @@
 [-] simple testing and hosting
 DOING
 ********************************************
-[ ] separar lobby e insider controlers
+[x] separar lobby e insider controlers
+[ ] Hold tap on mobile
 [ ] Copy loby link
 [ ] Host de la party
+[ ] Error lobby doesnt exists
 ********************************************
 
 REFACTOR
@@ -43,11 +45,16 @@ NEW FEATURES
   -------------------------------
   Low priority
   -------------------------------
-    [ ] optional timers
     [ ] scoreboard
     [ ] custom words
     [ ] QR code
 
+
+Refine this ones
+[ ] documentation
+[ ] dialyzer
+[ ] tests
+[ ] workerpool for games if to restart the games when they recive a bad msg
 
 
 Road to more games

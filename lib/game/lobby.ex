@@ -43,7 +43,7 @@ defmodule Game.Lobby do
       state = %{state | players: MapSet.put(state.players, player)}
       :ok = Game.Sequencer.update_players(state.seq, MapSet.to_list(state.players))
       :ok = broadcast_state(state)
-      {:reply, :ok, state}
+      {:reply, {:ok, state}, state}
     end
   end
 
@@ -59,9 +59,9 @@ defmodule Game.Lobby do
   end
 
   def handle_call(:play, _from, state) do
-    {:ok, game} = Game.Manager.start_link({state.id, MapSet.to_list(state.players)}, [])
+    {:ok, game_ref} = Game.Manager.start_link({state.id, MapSet.to_list(state.players)}, [])
     :ok = Game.Sequencer.apply_on_ready(state.seq, &play/1, [self()], 4)
-    :ok = broadcast(state, {:start, :game, game})
+    :ok = broadcast(state, {:start, :game_ref, game_ref})
     {:reply, :ok, state}
   end
 

@@ -1,21 +1,21 @@
 <div class="section">
 
   <div class="reveal">
-    <h6>Is <strong><%= @insider.player_foundit%></strong> the insider?</h6>
-    
+    <h6>Is <strong><%= @pub_state.player_foundit%></strong> the insider?</h6>
+
     <div class="row">
       <div class="row votes">
-        <div class="votes-bar" style={"max-width: #{(80/@insider.votes.total) * @insider.votes.count}%;"}></div>
+        <div class="votes-bar" style={"max-width: #{(80/@pub_state.votes.total) * @pub_state.votes.count}%;"}></div>
         <div class="votes-label">Yes</div>
-        <div class="votes-count"><%= @insider.votes.count%></div>
+        <div class="votes-count"><%= @pub_state.votes.count%></div>
       </div>
     </div>
 
     <div class="row">
       <div class="row votes">
-        <div class="votes-bar" style={"max-width: #{(80/@insider.votes.total) * (@insider.votes.total -  @insider.votes.count)}%;"}></div>
+        <div class="votes-bar" style={"max-width: #{(80/@pub_state.votes.total) * (@pub_state.votes.total -  @pub_state.votes.count)}%;"}></div>
         <div class="votes-label">No</div>
-        <div class="votes-count"><%= @insider.votes.total -  @insider.votes.count%></div>
+        <div class="votes-count"><%= @pub_state.votes.total -  @pub_state.votes.count%></div>
       </div>
     </div>
   </div>
@@ -23,12 +23,12 @@
   <div class="role-card small pattern-background wait-1 reveal">
 
     <div class="player-name small">
-      <strong><%= @insider.player_foundit%></strong>
+      <strong><%= @pub_state.player_foundit%></strong>
     </div>
 
     <div class="wait-2 reveal">
       <div class="role-icon small">
-        <%= case @insider.votes.role do %>
+        <%= case @pub_state.votes.role do %>
           <% :insider ->%>
             <%= render "logos/logo_insider.html", assigns %>
           <% :master ->%>
@@ -38,7 +38,7 @@
         <% end %>
       </div>
       <div class="role-text small">
-        <%= Atom.to_string(@insider.votes.role)%>
+        <%= Atom.to_string(@pub_state.votes.role)%>
       </div>
     </div>
 
